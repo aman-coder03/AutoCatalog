@@ -7,10 +7,10 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException, InvalidSelectorException
 from urllib.parse import quote_plus
 
-excel_path = r'C:\Users\PC-12\Desktop\Aman Srivastava\a2bzk\AtoZeBooks.xlsx'
+excel_path = r'YOUR INPUT FILE PATH'
 column_name = 'Title'
-base_url = "https://library.iitd.ac.in/a2zbkv?field_a2zsubject_value=&title={}&title_2=&items_per_page=20"
-output_path = r'C:\Users\PC-12\Desktop\Aman Srivastava\a2bzk\book_status_results_all.xlsx'
+base_url = "ENTER YOUR URL"
+output_path = r'YOUR OUTPUT FILE PATH'
 
 options = webdriver.ChromeOptions()
 options.add_argument("--headless")
@@ -39,8 +39,8 @@ def search_with_retry(search_url, max_retries=3):
             return True
         except TimeoutException:
             retries += 1
-            print(f"⚠️ Timeout while searching {search_url}. Retrying... ({retries}/{max_retries})")
-            time.sleep(2)  # Add a short delay before retrying
+            print(f"Timeout while searching {search_url}. Retrying... ({retries}/{max_retries})")
+            time.sleep(2)
     return False
 
 def find_book_link_with_retry(title, max_retries=3):
@@ -52,7 +52,7 @@ def find_book_link_with_retry(title, max_retries=3):
             return book_link
         except NoSuchElementException:
             retries += 1
-            print(f"⚠️ Book link not found for {title}. Retrying... ({retries}/{max_retries})")
+            print(f"Book link not found for {title}. Retrying... ({retries}/{max_retries})")
             time.sleep(2)
     return None
 
@@ -67,7 +67,7 @@ def load_detail_page_with_retry(detail_url, max_retries=3):
             return True
         except TimeoutException:
             retries += 1
-            print(f"⚠️ Timeout while loading detail page {detail_url}. Retrying... ({retries}/{max_retries})")
+            print(f"Timeout while loading detail page {detail_url}. Retrying... ({retries}/{max_retries})")
             time.sleep(2)
     return False
 
@@ -76,7 +76,7 @@ for index, row in df.iterrows():
     encoded_title = quote_plus(title)
     search_url = base_url.format(encoded_title)
 
-    print(f"\n🔎 [{index + 1}/{len(df)}] Searching URL: {search_url}")
+    print(f"\n[{index + 1}/{len(df)}] Searching URL: {search_url}")
 
     try:
         # Search the page with retries
@@ -91,7 +91,7 @@ for index, row in df.iterrows():
             continue
 
         detail_url = book_link.get_attribute("href")
-        print(f"➡️ Found link: {detail_url}")
+        print(f"Found link: {detail_url}")
 
         # Try to load the detail page with retries
         if not load_detail_page_with_retry(detail_url):
@@ -102,14 +102,14 @@ for index, row in df.iterrows():
         page_title = driver.title.lower()
 
         if "page not found" in page_source or "404" in page_title:
-            print(f"[❌] Detail page error: {title}")
+            print(f"Detail page error: {title}")
             results.append((title, "Detail page error"))
         else:
-            print(f"[✅] Detail page loaded: {title}")
+            print(f"Detail page loaded: {title}")
             results.append((title, "Success"))
 
     except Exception as e:
-        print(f"[❌] Error occurred for {title}: {e}")
+        print(f"Error occurred for {title}: {e}")
         results.append((title, f"Error: {str(e)}"))
 
 driver.quit()
