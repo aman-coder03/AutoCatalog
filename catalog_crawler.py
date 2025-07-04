@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 
-CHROMEDRIVER_PATH = r'c:\Users\PC-12\Documents\Downloads\chromedriver-win64\chromedriver-win64\chromedriver.exe'
+CHROMEDRIVER_PATH = r'ENTER YOUR CHROME DRIVER PATH'
 WAIT_TIME = 20
 MAX_PAGES = 100
 RETRY_LIMIT = 2
