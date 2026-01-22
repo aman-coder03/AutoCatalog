@@ -1,6 +1,6 @@
 # 📚 AutoCatalog
 
-**AutoCatalog** is a Python-based automation tool designed to scan, monitor, and log paginated digital library listings. It eliminates the need for manual inspection of vast catalogs by automating A-to-Z category crawling and title verification — empowering librarians, digital archivists, and QA teams to ensure content availability and maintain catalog health with ease.
+**AutoCatalog** is a Python-based automation tool designed to scan, monitor, and log paginated digital library listings. It eliminates the need for manual inspection of vast catalogs by automating A-to-Z category crawling and title verification - empowering librarians, digital archivists, and QA teams to ensure content availability and maintain catalog health with ease.
 
 Whether you're overseeing a university library's e-resources or managing a digital archive, AutoCatalog helps detect broken links, loading failures, and missing entries — with detailed logs and screenshots for complete transparency.
 
